@@ -22,4 +22,6 @@ RUN npm ci
 COPY server/. .
 COPY --from=build /usr/src/app/dist frontend/
 
+EXPOSE 80
+
 CMD ["node", ".", "-d frontend"]

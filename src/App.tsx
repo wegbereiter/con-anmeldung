@@ -124,12 +124,12 @@ function App() {
                         <Col as="dt" xs={4} className="text-right">Location</Col>
                         <Col as="dd" xs={8}>
                             <address>
-                                {config.location?.map(location => (
+                                {config.location?.map((location, idx) => (
                                     <div key={location}>
-                                        {config.website && (
+                                        {config.website && idx === 0 && (
                                             <a href={config.website} target="_blank" rel="noreferrer">{location}</a>
                                         )}
-                                        {!config.website && location}
+                                        {(!config.website || idx !== 0) && location}
                                     </div>
                                 ))}
                             </address>
