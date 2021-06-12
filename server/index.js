@@ -104,13 +104,11 @@ if (cmdOptions.key && cmdOptions.sheet) {
 }
 
 if (cmdOptions.dir) {
-    const root = pathUtil.resolve(process.cwd(), cmdOptions.dir);
+    const root = pathUtil.resolve(process.cwd(), cmdOptions.dir.trim());
+
+    console.log('Static directory:', root);
     app.use(compression());
-    app.use(
-        express.static(root, {
-            maxage: '365d',
-        }),
-    );
+    app.use(express.static(root));
 } else {
     console.warn('Warning: no files will be served via this server');
 }
