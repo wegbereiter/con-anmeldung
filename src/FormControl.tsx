@@ -47,7 +47,7 @@ export default function FormControl(props: Props): ReactElement | null {
                             {field.name === 'accept' && (
                                 <span>
                                     {'Ich habe die '}
-                                    <a href="/agb.pdf" target="_blank">AGB</a>
+                                    <a href="https://docs.google.com/document/d/1UDr9y04V7tZ9o__k6f3UfUFqogA5wMK0D97jTqqqTkY/edit?usp=sharing" target="_blank">AGB</a>
                                     {' und die '}
                                     <a >Datenschutzerklärung</a>
                                     {' gelesen und akzeptiere sie! Ich willige ein, dass meine Daten für den Zweck dieser Veranstaltung erhoben, gespeichert und verarbeitet werden dürfen.'}
