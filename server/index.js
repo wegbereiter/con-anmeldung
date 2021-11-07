@@ -35,6 +35,8 @@ commander
     .option('--npcpermit <boolean>', 'NPCs need a permit', process.env.NPC_PERMIT)
     .option('--showremainingbeds <boolean>', 'NPCs need a permit', process.env.SHOW_REMAINING_BEDS)
     .option('--vaccine <boolean>', 'NPCs need a permit', process.env.CORONA_VACCINE)
+    .option('--mythodea <boolean>', 'Is Mythodea con', process.env.MYTHODEA)
+    .option('--ruleset <string>', 'Which ruleset to use', process.env.RULESET)
     .parse(process.argv);
 
 const app = express();
@@ -67,6 +69,8 @@ const options = {
     npcCatering: cmdOptions.npccatering === 'true',
     pcCatering: cmdOptions.pccatering === 'true',
     npcPermit: cmdOptions.npcpermit === 'true',
+    mythodea: cmdOptions.mythodea === 'true',
+    ruleset: cmdOptions.ruleset,
 };
 
 app.use(bodyParser.json());

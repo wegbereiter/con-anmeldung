@@ -1,24 +1,17 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import clsx from 'clsx';
 import React, { ReactElement, useCallback, useRef, useState } from 'react';
-import { Button, Card, Col, Form, Row, Spinner } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
-import FormControl from './FormControl';
-import useFormConfig from './useFormConfig';
-import classes from './RegistrationForm.module.css';
+import { Card, Spinner } from 'react-bootstrap';
+import { Asserts } from 'yup';
+import useFormSchema from './useFormSchema';
+import YupForm from './YupForm';
 
 type FormState = 'initial' | 'loading' | 'success' | Error;
 
 export default function RegistrationForm(): ReactElement | null {
-    const { schema, fields } = useFormConfig();
-    const { register, handleSubmit, control } = useForm({
-        mode: 'onBlur',
-        resolver: yupResolver(schema),
-    });
+    const schema = useFormSchema();
     const [formState, setFormState] = useState<FormState>('initial');
     const errorRef = useRef<HTMLDivElement>(null)
 
-    const sendForm = useCallback(async (data: Record<string, unknown>) => {
+    const sendForm = useCallback(async (data: Asserts<typeof schema>) => {
         setFormState('loading');
 
         try {
@@ -86,21 +79,7 @@ export default function RegistrationForm(): ReactElement | null {
                     Anmeldung
                 </Card.Header>
                 <Card.Body>
-                    <Form onSubmit={handleSubmit(sendForm)} noValidate className={classes.form}>
-                        {fields.map(field => (
-                            <FormControl key={field.name} control={control} field={field} register={register} />
-                        ))}
-                        <Row>
-                            <Col>
-                                * Pflichtfeld
-                            </Col>
-                            <Col>
-                                <Button variant="primary" type="submit">
-                                    Anmelden
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Form>
+                    <YupForm schema={schema} onSubmit={sendForm} />
                 </Card.Body>
             </Card>
         </>

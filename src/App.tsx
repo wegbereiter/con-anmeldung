@@ -138,15 +138,15 @@ function App() {
                         <Col as="dt" xs={4} className="text-right">Preis</Col>
                         <Col as="dd" xs={8}>
                             <p>
-                                {config.pcPrice && (
+                                {config.pcPrice ? (
                                     <>
                                         {euro.format(config.pcPrice)}
                                         {config.pcCatering && ' inkl. Verpflegung'}
                                         {' für Spieler'}
                                         <br />
                                     </>
-                                )}
-                                {config.npcPrice && (
+                                ) : null}
+                                {config.npcPrice ? (
                                     <>
                                         {euro.format(config.npcPrice)}
                                         {config.npcCatering && ' inkl. Verpflegung'}
@@ -156,16 +156,18 @@ function App() {
                                             <small>NSC Anmeldungen nur nach vorheriger Rücksprache!</small>
                                         )}
                                     </>
-                                )}
+                                ) : null}
                             </p>
                         </Col>
 
-                        <Col as="dt" xs={4} className="text-right">Regelwerk</Col>
-                        <Col as="dd" xs={8}>
-                            <p>
-                                Aktuelles Mythodea-Regelwerk
-                            </p>
-                        </Col>
+                        {config.ruleset ? (
+                            <>
+                                <Col as="dt" xs={4} className="text-right">Regelwerk</Col>
+                                <Col as="dd" xs={8}>
+                                    <p>{config.ruleset}</p>
+                                </Col>
+                            </>
+                        ) : null}
 
                         <Col as="dt" xs={4} className="text-right">Orga</Col>
                         <Col as="dd" xs={8}>
@@ -180,37 +182,39 @@ function App() {
                             </p>
                         </Col>
 
-                        {(config.pcBeds || config.npcBeds) && (
+                        {(config.pcBeds || config.npcBeds) ? (
                             <>
                                 <Col as="dt" xs={4} className="text-right">Verfügbare Plätze</Col>
                                 <Col as="dd" xs={8}>
-                                    {config.pcBeds && (
+                                    {config.pcBeds ? (
                                         <AvailableBeds
                                             label="Spieler"
                                             total={config.pcBeds}
                                             beds={beds.pc}
                                         />
-                                    )}
-                                    {config.npcBeds && (
+                                    ) : null}
+                                    {config.npcBeds ? (
                                         <AvailableBeds
                                             label="NSC"
                                             total={config.npcBeds}
                                             beds={beds.npc}
                                         />
-                                    )}
+                                    ) : null}
                                 </Col>
                             </>
-                        )}
+                        ) : null}
                     </Row>
                 </Col>
                 <Col sm={6} className="text-right">
-                    <a
-                        href="https://www.live-adventure.de/de/spielwelt-medien/weitere-veranstaltungen/siedlercons"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <img src={siegel} alt="Mythodea Siegel" />
-                    </a>
+                    {config.mythodea &&  (
+                        <a
+                            href="https://www.live-adventure.de/de/spielwelt-medien/weitere-veranstaltungen/siedlercons"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <img src={siegel} alt="Mythodea Siegel" />
+                        </a>
+                    )}
                 </Col>
             </Row>
 

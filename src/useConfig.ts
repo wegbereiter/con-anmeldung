@@ -26,6 +26,8 @@ interface Config {
     npcCatering?: boolean;
     pcCatering?: boolean;
     npcPermit?: boolean;
+    mythodea?: boolean;
+    ruleset?: string;
 }
 
 let promise: ReturnType<typeof fetch> | undefined;
