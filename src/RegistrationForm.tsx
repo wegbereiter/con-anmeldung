@@ -31,7 +31,7 @@ export default function RegistrationForm(): ReactElement | null {
             }
 
         } catch (error) {
-            setFormState(error);
+            setFormState(error as Error);
         }
     }, []);
 
@@ -39,7 +39,7 @@ export default function RegistrationForm(): ReactElement | null {
         return (
             <div className="text-center">
                 <Spinner animation="border" role="status">
-                    <span className="sr-only">Loading...</span>
+                    <span className="visually-hidden">Loading...</span>
                 </Spinner>
             </div>
         );

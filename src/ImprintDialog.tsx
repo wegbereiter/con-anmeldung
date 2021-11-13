@@ -45,9 +45,11 @@ export default function ImprintDialog(props: Props): ReactElement {
 
                 <p>
                     Impressum vom <a
-                    target="_blank" href="http://www.impressum-generator.de/"
+                    target="_blank"
+                    href="http://www.impressum-generator.de/"
+                    rel="noreferrer"
                 >impressum-generator.de</a>
-                    der <a target="_blank" href="http://www.kanzlei-hasselbach.de/rechtsanwalt-arbeitsrecht-bonn/">Rechtsanwältin
+                    der <a target="_blank" rel="noreferrer" href="http://www.kanzlei-hasselbach.de/rechtsanwalt-arbeitsrecht-bonn/">Rechtsanwältin
                     Franziska Hasselbach, Bonn</a>
                 </p>
 

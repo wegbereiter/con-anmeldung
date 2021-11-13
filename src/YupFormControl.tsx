@@ -56,10 +56,8 @@ export default function YupFormControl(props: Props): ReactElement | null {
                             {name === 'accept' && (
                                 <span>
                                     {'Ich habe die '}
-                                    <a href="https://docs.google.com/document/d/1UDr9y04V7tZ9o__k6f3UfUFqogA5wMK0D97jTqqqTkY/edit?usp=sharing" target="_blank">AGB</a>
-                                    {' und die '}
-                                    <a >Datenschutzerklärung</a>
-                                    {' gelesen und akzeptiere sie! Ich willige ein, dass meine Daten für den Zweck dieser Veranstaltung erhoben, gespeichert und verarbeitet werden dürfen.'}
+                                    <a href="https://docs.google.com/document/d/1UDr9y04V7tZ9o__k6f3UfUFqogA5wMK0D97jTqqqTkY/edit?usp=sharing" target="_blank" rel="noreferrer">AGB</a>
+                                    {' und die Datenschutzerklärung gelesen und akzeptiere sie! Ich willige ein, dass meine Daten für den Zweck dieser Veranstaltung erhoben, gespeichert und verarbeitet werden dürfen.'}
                                 </span>
                             )}
                         </Form.Check.Label>
@@ -77,11 +75,38 @@ export default function YupFormControl(props: Props): ReactElement | null {
         );
     }
 
-    const options = !isSelect ? undefined : ['', ...oneOf].map(String).map(option => (
-        <option key={option} value={option}>
-            {option || 'Bitte auswählen'}
-        </option>
-    ));
+    if (isSelect) {
+        return (
+            <Form.Group as={Row} controlId={name} className={clsx({ required })}>
+                <Form.Label column sm={4}>{label}</Form.Label>
+                <Col sm={8}>
+                    <InputGroup hasValidation>
+                        <Form.Select
+                            {...register(name)}
+                            {...extraProps}
+                            isValid={isTouched && !fieldError}
+                            isInvalid={(isSubmitted || isTouched) && !!fieldError}
+                            defaultValue={schema.spec.default}
+                        >
+                            {['', ...oneOf].map(String).map(option => (
+                                <option key={option} value={option}>
+                                    {option || 'Bitte auswählen'}
+                                </option>
+                            ))}
+                        </Form.Select>
+                        <Form.Control.Feedback type="invalid">
+                            {fieldError?.message}
+                        </Form.Control.Feedback>
+                    </InputGroup>
+                    {hint && (
+                        <Form.Text>
+                            {hint}
+                        </Form.Text>
+                    )}
+                </Col>
+            </Form.Group>
+        );
+    }
 
     return (
         <Form.Group as={Row} controlId={name} className={clsx({ required })}>
@@ -96,9 +121,7 @@ export default function YupFormControl(props: Props): ReactElement | null {
                         isValid={isTouched && !fieldError}
                         isInvalid={(isSubmitted || isTouched) && !!fieldError}
                         defaultValue={schema.spec.default}
-                    >
-                        {options}
-                    </Form.Control>
+                    />
                     <Form.Control.Feedback type="invalid">
                         {fieldError?.message}
                     </Form.Control.Feedback>
