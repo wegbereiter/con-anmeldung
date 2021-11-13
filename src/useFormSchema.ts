@@ -42,12 +42,11 @@ export default function useFormSchema() {
                 ?.label('Anmeldung als NSC')
                 .meta({ hint: config?.npcPermit ? 'Bitte nur nach vorheriger Rücksprache!' : undefined }),
             itPowers: string()
-                .label('Charakter-Besonderheiten')
-                .meta({ hint: `Bist du ein Freundschaftsträger der Elemente oder sogar ein Mitray'Kor?` }),
-            sigil: string()
+                .label('Charakter-Besonderheiten'),
+            sigil: opt(config?.mythodea, string()
                 .label('Siegel')
                 .oneOf(['Keines', 'Osten', 'Norden', 'Westen', 'Süden', 'Reich der Rosen'])
-                .required(),
+                .required()),
             itBedroom: opt(config?.itRooms, string())
                 ?.label('Ein durchgängig bespielter Schlafraum ist...')
                 .oneOf([
