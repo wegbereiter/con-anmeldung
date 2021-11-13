@@ -31,7 +31,7 @@ export default function RegistrationForm(): ReactElement | null {
             }
 
         } catch (error) {
-            setFormState(error);
+            setFormState(error as Error);
         }
     }, []);
 
