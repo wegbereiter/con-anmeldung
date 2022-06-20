@@ -52,20 +52,13 @@ export default function YupFormControl(props: Props): ReactElement | null {
                             {...register(name)}
                         />
                         <Form.Check.Label>
-                            {name !== 'accept' && label}
-                            {name === 'accept' && (
-                                <span>
-                                    {'Ich habe die '}
-                                    <a href="https://docs.google.com/document/d/1UDr9y04V7tZ9o__k6f3UfUFqogA5wMK0D97jTqqqTkY/edit?usp=sharing" target="_blank" rel="noreferrer">AGB</a>
-                                    {' und die Datenschutzerklärung gelesen und akzeptiere sie! Ich willige ein, dass meine Daten für den Zweck dieser Veranstaltung erhoben, gespeichert und verarbeitet werden dürfen.'}
-                                </span>
-                            )}
+                            <span dangerouslySetInnerHTML={{ __html: label ?? '' }} />
                         </Form.Check.Label>
                         <Form.Control.Feedback type="invalid">
                             {fieldError?.message}
                         </Form.Control.Feedback>
                         {hint && (
-                            <Form.Text as="div" className="ps-2">
+                            <Form.Text as="div">
                                 {hint}
                             </Form.Text>
                         )}

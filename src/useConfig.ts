@@ -28,6 +28,8 @@ interface Config {
     npcPermit?: boolean;
     mythodea?: boolean;
     ruleset?: string;
+    logo?: string;
+    agb?: string;
 }
 
 let promise: ReturnType<typeof fetch> | undefined;

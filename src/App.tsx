@@ -74,13 +74,19 @@ function App() {
         );
     }
 
+    // If no logo is defined in config, use the default.
+    // If the logo in config is falsey, don't display a logo at all.
+    const actualLogo = (config.logo ?? logo) || null;
+
     return (
         <Container>
             <Row>
                 <Col>
-                    <p className="text-center">
-                        <img src={logo} alt="Name" style={{ width: '350px', margin: '15px' }} />
-                    </p>
+                    {actualLogo ? (
+                        <p className="text-center">
+                            <img src={actualLogo} alt="Name" style={{ width: '350px', margin: '15px' }} />
+                        </p>
+                    ) : null}
                     <h1>
                         {config.name}
                         <small className="text-muted" style={{ marginLeft: '1rem', fontSize: '1.6rem' }}>

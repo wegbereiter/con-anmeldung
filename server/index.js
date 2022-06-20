@@ -37,6 +37,8 @@ commander
     .option('--vaccine <boolean>', 'NPCs need a permit', process.env.CORONA_VACCINE)
     .option('--mythodea <boolean>', 'Is Mythodea con', process.env.MYTHODEA)
     .option('--ruleset <string>', 'Which ruleset to use', process.env.RULESET)
+    .option('--logo <string>', 'Which logo url to use', process.env.LOGO_URL)
+    .option('--agb <string>', 'Which AGB url to use', process.env.AGB_URL)
     .parse(process.argv);
 
 const app = express();
@@ -71,6 +73,8 @@ const options = {
     npcPermit: cmdOptions.npcpermit === 'true',
     mythodea: cmdOptions.mythodea === 'true',
     ruleset: cmdOptions.ruleset,
+    logo: cmdOptions.logo,
+    agb: cmdOptions.agb,
 };
 
 app.use(bodyParser.json());
