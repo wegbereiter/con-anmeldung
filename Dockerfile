@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 
 COPY package.json .
 COPY package-lock.json .
-RUN npm ci
+RUN npm ci --force
 
 COPY . .
 RUN npm run build
@@ -17,7 +17,7 @@ WORKDIR /usr/src/app
 
 COPY server/package.json .
 COPY server/package-lock.json .
-RUN npm ci
+RUN npm ci --force
 
 COPY server/. .
 COPY --from=build /usr/src/app/dist frontend/
