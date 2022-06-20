@@ -65,7 +65,7 @@ export default function YupFormControl(props: Props): ReactElement | null {
                             {fieldError?.message}
                         </Form.Control.Feedback>
                         {hint && (
-                            <Form.Text>
+                            <Form.Text as="div" className="ps-2">
                                 {hint}
                             </Form.Text>
                         )}
