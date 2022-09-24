@@ -61,7 +61,7 @@ export default function RegistrationForm(): ReactElement | null {
 
     return (
         <>
-            {formState instanceof Error && (
+            {formState instanceof Error ? (
                 <div ref={errorRef} className="mb-4">
                     <Card bg="danger" text="white" body >
                         <Card.Title>Fehler</Card.Title>
@@ -73,7 +73,7 @@ export default function RegistrationForm(): ReactElement | null {
                         </p>
                     </Card>
                 </div>
-            )}
+            ) : null}
             <Card>
                 <Card.Header>
                     Anmeldung

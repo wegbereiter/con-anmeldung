@@ -91,11 +91,11 @@ export default function YupFormControl(props: Props): ReactElement | null {
                             {fieldError?.message}
                         </Form.Control.Feedback>
                     </InputGroup>
-                    {hint && (
+                    {hint ? (
                         <Form.Text>
                             {hint}
                         </Form.Text>
-                    )}
+                    ) : null}
                 </Col>
             </Form.Group>
         );
@@ -119,11 +119,11 @@ export default function YupFormControl(props: Props): ReactElement | null {
                         {fieldError?.message}
                     </Form.Control.Feedback>
                 </InputGroup>
-                {hint && (
+                {hint ? (
                     <Form.Text>
                         {hint}
                     </Form.Text>
-                )}
+                ) : null}
             </Col>
         </Form.Group>
     );

@@ -105,16 +105,16 @@ function App() {
                             <p>{config.type}</p>
                         </Col>
 
-                        {config.minAge && (
+                        {config.minAge ? (
                             <>
                                 <Col as="dt" xs={4} className="text-right">Mindestalter</Col>
                                 <Col as="dd" xs={8}>
                                     <p>{config.minAge} Jahre</p>
                                 </Col>
                             </>
-                        )}
+                        ) : null}
 
-                        {config.start && config.end && (
+                        {config.start && config.end ? (
                             <>
                                 <Col as="dt" xs={4} className="text-right">Datum</Col>
                                 <Col as="dd" xs={8}>
@@ -125,7 +125,7 @@ function App() {
                                     </p>
                                 </Col>
                             </>
-                        )}
+                        ) : null}
 
                         <Col as="dt" xs={4} className="text-right">Location</Col>
                         <Col as="dd" xs={8}>
@@ -212,7 +212,7 @@ function App() {
                     </Row>
                 </Col>
                 <Col sm={6} className="text-right">
-                    {config.mythodea &&  (
+                    {config.mythodea ?  (
                         <a
                             href="https://www.live-adventure.de/de/spielwelt-medien/weitere-veranstaltungen/siedlercons"
                             target="_blank"
@@ -220,7 +220,7 @@ function App() {
                         >
                             <img src={siegel} alt="Mythodea Siegel" />
                         </a>
-                    )}
+                    ) : null}
                 </Col>
             </Row>
 
