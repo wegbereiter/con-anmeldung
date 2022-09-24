@@ -68,8 +68,8 @@ export default function useFormSchema() {
             accept: opt(config?.agb, boolean())
                 ?.label(`Ich habe die <a href="${config?.agb}" target="_blank" rel="noreferrer">AGB</a> und die Datenschutzerklärung gelesen und akzeptiere sie! Ich willige ein, dass meine Daten für den Zweck dieser Veranstaltung erhoben, gespeichert und verarbeitet werden dürfen.`)
                 .oneOf([true], 'Du musst die AGB und Datenschutzerklärung lesen und akzeptieren.'),
-            minAge: boolean()
-                .label(`Ich bin mir über die Natur dieser Veranstaltung bewusst. Diese Con ist für Teilnehmer ab ${config?.minAge} Jahren gedacht.`)
+            minAge: opt(config?.minAge, boolean())
+                ?.label(`Ich bin mir über die Natur dieser Veranstaltung bewusst. Diese Con ist für Teilnehmer ab ${config?.minAge} Jahren gedacht.`)
                 .oneOf([true], `Du musst bestätigen, dass du mindestens ${config?.minAge} Jahre alt bist.`),
         });
     }, [config]);

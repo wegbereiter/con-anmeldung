@@ -50,7 +50,7 @@ const options = {
     pcBeds: Number(cmdOptions.pcs),
     showRemainingBeds: cmdOptions.showremainingbeds === 'true',
     coronaVaccine: cmdOptions.vaccine === 'true',
-    minAge: Number(cmdOptions.age),
+    minAge: !!cmdOptions.age ? Number(cmdOptions.age) : undefined,
     start: cmdOptions.start,
     end: cmdOptions.end,
     name: cmdOptions.name,
