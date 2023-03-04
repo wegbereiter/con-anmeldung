@@ -50,7 +50,7 @@ const options = {
     pcBeds: Number(cmdOptions.pcs),
     showRemainingBeds: cmdOptions.showremainingbeds === 'true',
     coronaVaccine: cmdOptions.vaccine === 'true',
-    minAge: !!cmdOptions.age ? Number(cmdOptions.age) : undefined,
+    minAge: !!cmdOptions.age?.trim?.() ? Number(cmdOptions.age) : undefined,
     start: cmdOptions.start,
     end: cmdOptions.end,
     name: cmdOptions.name,
@@ -58,12 +58,12 @@ const options = {
     description: cmdOptions.description,
     type: cmdOptions.type,
     location: cmdOptions.location.split('\n'),
-    website: cmdOptions.website,
+    website: cmdOptions.website?.trim?.() || null,
     pcPrice: Number(cmdOptions.pcprice),
     npcPrice: Number(cmdOptions.npcprice),
     orga: cmdOptions.orga
         .split(',')
-        .map(entry => entry.split('|'))
+        .map((entry) => entry.split('|'))
         .map(([name, email]) => ({ name, email })),
     itRooms: cmdOptions.itrooms === 'true',
     fears: cmdOptions.fears === 'true',
@@ -93,19 +93,19 @@ if (cmdOptions.key && cmdOptions.sheet) {
         api.authenticate()
             .then(() => api.register(req.body))
             .then(() => res.status(200).json({ message: 'success' }))
-            .catch(e => res.status(500).json({ message: e.message }));
+            .catch((e) => res.status(500).json({ message: e.message }));
     });
 
     app.get('/api/count', (req, res) => {
         api.authenticate()
             .then(() => api.countRows())
-            .then(count =>
+            .then((count) =>
                 res.status(200).json({
                     pc: { current: count.pc, remaining: options.pcBeds - count.pc },
                     npc: { current: count.npc, remaining: options.npcBeds - count.npc },
                 }),
             )
-            .catch(e => res.status(500).json({ message: e.message }));
+            .catch((e) => res.status(500).json({ message: e.message }));
     });
 } else {
     console.warn('Warning: /api endpoints are disabled');
