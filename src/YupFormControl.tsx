@@ -15,7 +15,7 @@ export default function YupFormControl(props: Props): ReactElement | null {
     const { control, name, register, schema } = props;
 
     const { label, tests, meta, oneOf, type } = useMemo(() => schema.describe(), [schema]);
-    const { props: extraProps = {}, hint, textarea = false } = meta as any ?? {};
+    const { props: extraProps = {}, hint, textarea = false } = meta ?? {};
     const required = tests.some(t => t.name === 'required') ?? false;
     const isSelect = oneOf && oneOf.length > 0;
 

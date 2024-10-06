@@ -16,7 +16,7 @@ export default function useFormSchema() {
             ? endOfDay(sub(config.start ? parseISO(config.start) : new Date(), { years: config.minAge }))
             : new Date();
 
-        return object().shape({
+        return object({
             name: string().label('Vor- und Nachname').required(),
             email: string().label('E-Mail').email().required(),
             street: string().label('Straße').required(),

@@ -1,10 +1,16 @@
-import { registerGermanYupLocale, mixed } from '@stephen-r/yup-i18n-de';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { setLocale } from 'yup';
+import { de } from 'yup-locales';
 import App from './App';
 
-mixed.notType = ({ path }) => `${path} muss ein gültiges Datum sein (tt.mm.yyyy)`;
-registerGermanYupLocale();
+setLocale({
+    ...de,
+    mixed: {
+        ...de.mixed,
+        notType: ({ path }) => `${path} muss ein gültiges Datum sein (tt.mm.yyyy)`,
+    },
+});
 
 const rootElement = document.getElementById('root');
 
