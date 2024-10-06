@@ -1,3 +1,4 @@
+const { JWT } = require('google-auth-library');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const dateRegExp = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
 const moment = require('moment-timezone');
@@ -29,12 +30,12 @@ const columns = {
 
 class GoogleApi {
     constructor(credentials, spreadSheetId) {
-        this.credentials = credentials;
-        this.spreadSheet = new GoogleSpreadsheet(spreadSheetId);
-    }
-
-    authenticate() {
-        return this.spreadSheet.useServiceAccountAuth(this.credentials);
+        const jwt = new JWT({
+            email: credentials.client_email,
+            key: credentials.private_key,
+            scopes: ['https://www.googleapis.com/auth/spreadsheets',],
+        });
+        this.spreadSheet = new GoogleSpreadsheet(spreadSheetId, jwt);
     }
 
     async register(person) {
