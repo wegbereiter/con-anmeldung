@@ -47,7 +47,7 @@ export default function useConfig(): Config | undefined {
                 });
         }
 
-        promise.then(result => setConfig(result));
+        promise.then(result => setConfig(result)).catch(e => console.error('Failed to load config', e));
     }, []);
 
     return config;

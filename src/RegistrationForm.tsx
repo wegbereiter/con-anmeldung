@@ -9,7 +9,7 @@ type FormState = 'initial' | 'loading' | 'success' | Error;
 export default function RegistrationForm(): ReactElement | null {
     const schema = useFormSchema();
     const [formState, setFormState] = useState<FormState>('initial');
-    const errorRef = useRef<HTMLDivElement>(null)
+    const errorRef = useRef<HTMLDivElement>(null);
 
     const sendForm = useCallback(async (data: Asserts<typeof schema>) => {
         setFormState('loading');
@@ -29,7 +29,6 @@ export default function RegistrationForm(): ReactElement | null {
             } else {
                 setFormState('success');
             }
-
         } catch (error) {
             setFormState(error as Error);
         }
@@ -63,7 +62,7 @@ export default function RegistrationForm(): ReactElement | null {
         <>
             {formState instanceof Error ? (
                 <div ref={errorRef} className="mb-4">
-                    <Card bg="danger" text="white" body >
+                    <Card bg="danger" text="white" body>
                         <Card.Title>Fehler</Card.Title>
                         <p>Folgender Fehler ist aufgetreten:</p>
                         <blockquote>{formState.message}</blockquote>

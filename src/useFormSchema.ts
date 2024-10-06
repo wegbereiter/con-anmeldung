@@ -12,7 +12,9 @@ export default function useFormSchema() {
     const config = useConfig();
 
     return useMemo(() => {
-        const maxBirthday = config ? endOfDay(sub(config.start ? parseISO(config.start) : new Date(), { years: config.minAge })) : new Date();
+        const maxBirthday = config
+            ? endOfDay(sub(config.start ? parseISO(config.start) : new Date(), { years: config.minAge }))
+            : new Date();
 
         return object().shape({
             name: string().label('Vor- und Nachname').required(),
@@ -62,7 +64,7 @@ export default function useFormSchema() {
             comment: string().label('Sonstige Anmerkungen').meta({ textarea: true }),
             vaccine: string()
                 .label('Ich bin vollständig gegen SARS-CoV-2 geimpft')
-                .oneOf([ 'keine Angabe', 'Ja', 'Nein' ])
+                .oneOf(['keine Angabe', 'Ja', 'Nein'])
                 .required()
                 .meta({ hint: 'Die Angabe bezieht sich auf den Zeitpunkt der Veranstaltung.' }),
             accept: opt(config?.agb, boolean())

@@ -7,6 +7,8 @@ interface Props {
 }
 
 export default function ImprintDialog(props: Props): ReactElement {
+    const { onHide } = props;
+
     return (
         <Modal {...props} keyboard={false} size="lg">
             <Modal.Header closeButton>
@@ -44,17 +46,17 @@ export default function ImprintDialog(props: Props): ReactElement {
                 </p>
 
                 <p>
-                    Impressum vom <a
-                    target="_blank"
-                    href="http://www.impressum-generator.de/"
-                    rel="noreferrer"
-                >impressum-generator.de</a>
-                    der <a target="_blank" rel="noreferrer" href="http://www.kanzlei-hasselbach.de/rechtsanwalt-arbeitsrecht-bonn/">Rechtsanwältin
-                    Franziska Hasselbach, Bonn</a>
+                    Impressum vom
+                    <a target="_blank" href="http://www.impressum-generator.de/" rel="noreferrer">impressum-generator.de</a>
+                    der
+                    <a target="_blank" rel="noreferrer" href="http://www.kanzlei-hasselbach.de/rechtsanwalt-arbeitsrecht-bonn/">
+                        Rechtsanwältin Franziska Hasselbach, Bonn
+                    </a>
                 </p>
 
                 <h2>Datenschutzerklärung</h2>
-                <p>Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von
+                <p>
+                    Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von
                     personenbezogenen Daten (nachfolgend
                     kurz „Daten“) innerhalb unseres Onlineangebotes und der mit ihm verbundenen Webseiten, Funktionen
                     und Inhalte sowie externen
@@ -345,13 +347,14 @@ export default function ImprintDialog(props: Props): ReactElement {
                 </p>
                 <p>
                     Vom Websiteinhaber angepasst. <br />
-                    <a href="https://datenschutz-generator.de">Erstellt mit Datenschutz-Generator.de von RA Dr. Thomas
-                        Schwenke</a>
+                    <a href="https://datenschutz-generator.de">
+                        Erstellt mit Datenschutz-Generator.de von RA Dr. Thomas Schwenke
+                    </a>
                 </p>
             </Modal.Body>
 
             <Modal.Footer>
-                <Button variant="secondary" onClick={() => props.onHide()}>Schließen</Button>
+                <Button variant="secondary" onClick={() => onHide()}>Schließen</Button>
             </Modal.Footer>
         </Modal>
     );

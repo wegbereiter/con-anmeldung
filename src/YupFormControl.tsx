@@ -52,10 +52,11 @@ export default function YupFormControl(props: Props): ReactElement | null {
                             {...register(name)}
                         />
                         <Form.Check.Label>
+                            {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
                             <span dangerouslySetInnerHTML={{ __html: label ?? '' }} />
                         </Form.Check.Label>
                         <Form.Control.Feedback type="invalid">
-                            {fieldError?.message}
+                            {String(fieldError?.message)}
                         </Form.Control.Feedback>
                         {hint && (
                             <Form.Text as="div">
@@ -88,7 +89,7 @@ export default function YupFormControl(props: Props): ReactElement | null {
                             ))}
                         </Form.Select>
                         <Form.Control.Feedback type="invalid">
-                            {fieldError?.message}
+                            {String(fieldError?.message)}
                         </Form.Control.Feedback>
                     </InputGroup>
                     {hint ? (
@@ -116,7 +117,7 @@ export default function YupFormControl(props: Props): ReactElement | null {
                         defaultValue={schema.spec.default}
                     />
                     <Form.Control.Feedback type="invalid">
-                        {fieldError?.message}
+                        {String(fieldError?.message)}
                     </Form.Control.Feedback>
                 </InputGroup>
                 {hint ? (
