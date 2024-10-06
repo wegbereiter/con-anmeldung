@@ -1,14 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { setLocale } from 'yup';
+import { de } from 'yup-locales';
 import App from './App';
-import { registerGermanYupLocale, mixed } from '@stephen-r/yup-i18n-de/dist';
 
-mixed.notType = ({ path }) => `${path} muss ein gültiges Datum sein (tt.mm.yyyy)`;
-registerGermanYupLocale();
+setLocale({
+    ...de,
+    mixed: {
+        ...de.mixed,
+        notType: ({ path }) => `${path} muss ein gültiges Datum sein (tt.mm.yyyy)`,
+    },
+});
 
-ReactDOM.render(
+const rootElement = document.getElementById('root');
+
+if (!rootElement) {
+    throw new Error('Could not find node to render app into');
+}
+
+const root = createRoot(rootElement);
+
+root.render(
     <React.StrictMode>
         <App />
     </React.StrictMode>,
-    document.getElementById('root'),
 );

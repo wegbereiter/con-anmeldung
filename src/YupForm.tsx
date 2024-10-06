@@ -2,22 +2,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React, { ReactElement } from 'react';
 import { Button, Col, Form, Row, Stack } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { Asserts, BaseSchema } from 'yup';
-import ObjectSchema, { ObjectShape } from 'yup/lib/object';
+import { Asserts, Schema, type AnyObjectSchema } from 'yup';
 import classes from './RegistrationForm.module.css';
 import YupFormControl from './YupFormControl';
 
-interface Props<TShape extends ObjectShape, Schema extends ObjectSchema<TShape> = ObjectSchema<TShape>> {
+interface Props<Schema extends AnyObjectSchema> {
     schema: Schema;
     onSubmit(data: Asserts<Schema>): void | Promise<void>;
 }
 
-function isSchema(entry: [string, unknown]): entry is [string, BaseSchema] {
+function isSchema(entry: [string, unknown]): entry is [string, Schema] {
     const [, schema] = entry;
-    return schema instanceof BaseSchema;
+    return schema instanceof Schema;
 }
 
-export default function YupForm<TShape extends ObjectShape>(props: Props<TShape>): ReactElement | null {
+export default function YupForm<TShape extends AnyObjectSchema>(props: Props<TShape>): ReactElement | null {
     const { schema, onSubmit } = props;
     const { register, handleSubmit, control } = useForm({
         mode: 'onBlur',
@@ -27,7 +26,7 @@ export default function YupForm<TShape extends ObjectShape>(props: Props<TShape>
     const fieldSchemas = Object.entries(schema.fields);
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit as any)} noValidate className={classes.form}>
+        <Form onSubmit={handleSubmit(onSubmit)} noValidate className={classes.form}>
             <Stack gap={3}>
                 {fieldSchemas.filter(isSchema).map(([name, schema]) => (
                     <YupFormControl key={name} name={name} control={control} schema={schema} register={register} />

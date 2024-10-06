@@ -15,7 +15,7 @@ export default function YupFormControl(props: Props): ReactElement | null {
     const { control, name, register, schema } = props;
 
     const { label, tests, meta, oneOf, type } = useMemo(() => schema.describe(), [schema]);
-    const { props: extraProps = {}, hint, textarea = false } = meta as any ?? {};
+    const { props: extraProps = {}, hint, textarea = false } = meta ?? {};
     const required = tests.some(t => t.name === 'required') ?? false;
     const isSelect = oneOf && oneOf.length > 0;
 
@@ -52,10 +52,11 @@ export default function YupFormControl(props: Props): ReactElement | null {
                             {...register(name)}
                         />
                         <Form.Check.Label>
+                            {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
                             <span dangerouslySetInnerHTML={{ __html: label ?? '' }} />
                         </Form.Check.Label>
                         <Form.Control.Feedback type="invalid">
-                            {fieldError?.message}
+                            {String(fieldError?.message)}
                         </Form.Control.Feedback>
                         {hint && (
                             <Form.Text as="div">
@@ -88,7 +89,7 @@ export default function YupFormControl(props: Props): ReactElement | null {
                             ))}
                         </Form.Select>
                         <Form.Control.Feedback type="invalid">
-                            {fieldError?.message}
+                            {String(fieldError?.message)}
                         </Form.Control.Feedback>
                     </InputGroup>
                     {hint ? (
@@ -116,7 +117,7 @@ export default function YupFormControl(props: Props): ReactElement | null {
                         defaultValue={schema.spec.default}
                     />
                     <Form.Control.Feedback type="invalid">
-                        {fieldError?.message}
+                        {String(fieldError?.message)}
                     </Form.Control.Feedback>
                 </InputGroup>
                 {hint ? (

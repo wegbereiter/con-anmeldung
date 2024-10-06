@@ -49,19 +49,22 @@ function App() {
 
     useEffect(() => {
         if (!config?.showRemainingBeds) {
-            return;
+            return () => { };
         }
 
         fetch('/api/count')
             .then(response => response.json())
-            .then(result => setBeds(result));
+            .then(result => setBeds(result))
+            .catch(e => console.error('Failed to load bed count', e));
 
         const interval = setInterval(() => {
             fetch('/api/count')
                 .then(response => response.json())
-                .then(result => setBeds(result));
+                .then(result => setBeds(result))
+                .catch(e => console.error('Failed to load bed count', e));
         }, 20000);
-        return () => clearInterval(interval);
+
+        return () => { clearInterval(interval); };
     }, [config?.showRemainingBeds]);
 
     if (!config) {
@@ -94,6 +97,7 @@ function App() {
                         </small>
                     </h1>
 
+                    {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
                     <div dangerouslySetInnerHTML={{ __html: config.description ?? '' }} />
                 </Col>
             </Row>
@@ -212,7 +216,7 @@ function App() {
                     </Row>
                 </Col>
                 <Col sm={6} className="text-right">
-                    {config.mythodea ?  (
+                    {config.mythodea ? (
                         <a
                             href="https://www.live-adventure.de/de/spielwelt-medien/weitere-veranstaltungen/siedlercons"
                             target="_blank"

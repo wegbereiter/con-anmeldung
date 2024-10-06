@@ -1,13 +1,11 @@
-require('dotenv').config();
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const pathUtil = require('path');
-const commander = require('commander');
+const { program } = require('commander');
 const GoogleApi = require('./googleApi');
 
-commander
+program
     .version('1.0.0')
     .option('-p, --port <port>', 'Port', process.env.PORT || 80)
     .option('-s, --sheet <sheetId>', 'The ID for the spread sheet', process.env.SHEET)
@@ -43,7 +41,7 @@ commander
 
 const app = express();
 
-const cmdOptions = commander.opts();
+const cmdOptions = program.opts();
 
 const options = {
     npcBeds: Number(cmdOptions.npcs),
@@ -90,15 +88,13 @@ if (cmdOptions.key && cmdOptions.sheet) {
     const api = new GoogleApi(key, sheetId);
 
     app.post('/api/register', (req, res) => {
-        api.authenticate()
-            .then(() => api.register(req.body))
+        api.register(req.body)
             .then(() => res.status(200).json({ message: 'success' }))
             .catch((e) => res.status(500).json({ message: e.message }));
     });
 
     app.get('/api/count', (req, res) => {
-        api.authenticate()
-            .then(() => api.countRows())
+        api.countRows()
             .then((count) =>
                 res.status(200).json({
                     pc: { current: count.pc, remaining: options.pcBeds - count.pc },

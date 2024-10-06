@@ -1,4 +1,4 @@
-FROM node:16-alpine as build
+FROM node:22-alpine as build
 ENV NODE_ENV=development
 ENV TZ=Europe/Berlin
 WORKDIR /usr/src/app
@@ -10,7 +10,7 @@ RUN npm ci --force
 COPY . .
 RUN npm run build
 
-FROM node:16-alpine as app
+FROM node:22-alpine as app
 ENV NODE_ENV=production
 ENV TZ=Europe/Berlin
 WORKDIR /usr/src/app
